@@ -16,6 +16,9 @@
 
 package com.example.android.kotlincoroutines.main
 
+import android.app.Activity
+import android.content.Intent
+import android.net.VpnService
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
@@ -46,7 +49,12 @@ class MainActivity : AppCompatActivity() {
 
         switchButton.setOnCheckedChangeListener { _, isChecked ->
             if (isChecked) {
-                // The switch is enabled/checked
+                intent = VpnService.prepare(this)
+                if(intent !=null){
+                    startActivityForResult(intent,0)
+                }else{
+                    onActivityResult(0,RESULT_OK,null)
+                }
 //                text_view.text = "Switch on"
                viewModel.onMainViewClicked("Connecting....")
             } else {
@@ -71,5 +79,13 @@ class MainActivity : AppCompatActivity() {
             }
 
         })
+    }
+
+    override fun onActivityResult(requestCode: Int,resultCode: Int,data: Intent?){
+        super.onActivityResult(requestCode, resultCode, data)
+        if (resultCode== Activity.RESULT_OK){
+            val intent = Intent(this, LocalVpnService::class.java)
+            startService(intent)
+        }
     }
 }

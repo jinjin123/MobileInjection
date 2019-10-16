@@ -15,6 +15,6 @@
   -->
 
 <resources>
-    <string name="app_name">MvP freedom</string>
+    <string name="app_name">freedom</string>
     <string name="click_to_start">Click to start</string>
 </resources>
