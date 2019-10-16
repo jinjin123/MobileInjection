@@ -43,9 +43,8 @@ class MainActivity : AppCompatActivity() {
         val viewModel = ViewModelProviders.of(this)
             .get(MainViewModel::class.java)
 
-        var msg = ""
 
-        switchButton.setOnCheckedChangeListener { buttonView, isChecked ->
+        switchButton.setOnCheckedChangeListener { _, isChecked ->
             if (isChecked) {
                 // The switch is enabled/checked
 //                text_view.text = "Switch on"
