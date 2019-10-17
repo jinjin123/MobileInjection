@@ -25,7 +25,7 @@ apply plugin: 'kotlin-kapt'
 android {
     compileSdkVersion 28
     defaultConfig {
-        applicationId "com.example.android.kotlincoroutines"
+        applicationId "tun.proxy"
         minSdkVersion 21
         targetSdkVersion 28
         versionCode 1

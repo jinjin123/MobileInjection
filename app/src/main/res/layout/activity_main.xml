@@ -9,7 +9,7 @@
     android:gravity="center"
     android:background="#FF798BFC"
     android:orientation="vertical"
-    tools:context=".main.MainActivity">
+    tools:context=".main.tun.proxy.MainActivity">
 
     <Switch
         android:layout_width="wrap_content"
