@@ -22,6 +22,7 @@ import android.net.VpnService
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
+import android.util.Log
 import android.widget.Switch
 import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
@@ -33,10 +34,10 @@ import kotlinx.android.synthetic.main.activity_main.*
  * Main Activity for our application. This activity uses [MainViewModel] to implement MVVM.
  */
 class MainActivity : AppCompatActivity() {
-
-    /**
-     * Inflate layout and setup click listeners and LiveData observers.
-     */
+    companion object {
+        private const val TAG="LocalVPN";
+        private const val VPN_REQUEST_CODE = 0x0F
+    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -55,23 +56,17 @@ class MainActivity : AppCompatActivity() {
                 }else{
                     onActivityResult(0,RESULT_OK,null)
                 }
-//                text_view.text = "Switch on"
                viewModel.onMainViewClicked("Connecting....")
             } else {
-//                text_view.text = "Switch off"
+                Log.d(TAG,"Stop VPN")
+                val intent = Intent(this,LocalVpnService::class.java)
+                intent.putExtra("COMMAND", "STOP")
+                startService(intent)
                 viewModel.onMainViewClicked("Close...")
 
             }
         }
 
-        // When rootLayout is clicked call onMainViewClicked in ViewModel
-//        rootLayout.setOnClickListener {view ->
-//               viewModel.onMainViewClicked()
-//            viewModel.onMainViewChanged()
-//        }
-
-
-        // Show a snackbar whenever the [ViewModel.snackbar] is updated with a non-null value
         viewModel.snackbar.observe(this, Observer { text ->
             text?.let {
                 Snackbar.make(rootLayout, text, Snackbar.LENGTH_SHORT).show()
