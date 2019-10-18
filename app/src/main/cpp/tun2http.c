@@ -72,7 +72,7 @@ Java_tun_proxy_service_LocalVpnService_jni_1init(JNIEnv *env, jobject instance) 
 }
 
 JNIEXPORT void JNICALL
-Java_tun_proxy_service_Tun2HttpVpnService_jni_1start(
+Java_tun_proxy_service_LocalVpnService_jni_1start(
         JNIEnv *env, jobject instance, jint tun, jboolean fwd53, jint rcode, jstring proxyIp, jint proxyPort) {
 
     const char *proxy_ip = (*env)->GetStringUTFChars(env, proxyIp, 0);
@@ -117,7 +117,7 @@ Java_tun_proxy_service_Tun2HttpVpnService_jni_1start(
 }
 
 JNIEXPORT void JNICALL
-Java_tun_proxy_service_Tun2HttpVpnService_jni_1stop(
+Java_tun_proxy_service_LocalVpnService_jni_1stop(
         JNIEnv *env, jobject instance, jint tun) {
     pthread_t t = thread_id;
     log_android(ANDROID_LOG_WARN, "Stop tun %d  thread %x", tun, t);
@@ -140,13 +140,13 @@ Java_tun_proxy_service_Tun2HttpVpnService_jni_1stop(
 }
 
 JNIEXPORT jint JNICALL
-Java_tun_proxy_service_Tun2HttpVpnService_jni_1get_1mtu(JNIEnv *env, jobject instance) {
+Java_tun_proxy_service_LocalVpnService_jni_1get_1mtu(JNIEnv *env, jobject instance) {
     return get_mtu();
 }
 
 
 JNIEXPORT void JNICALL
-Java_tun_proxy_service_Tun2HttpVpnService_jni_1done(JNIEnv *env, jobject instance) {
+Java_tun_proxy_service_LocalVpnService_jni_1done(JNIEnv *env, jobject instance) {
     log_android(ANDROID_LOG_INFO, "Done");
 
     clear();
