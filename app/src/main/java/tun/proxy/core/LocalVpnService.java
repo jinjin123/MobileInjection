@@ -16,6 +16,7 @@ import tun.proxy.tcpip.CommonMethods;
 import tun.proxy.tcpip.IPHeader;
 import tun.proxy.tcpip.TCPHeader;
 import tun.proxy.tcpip.UDPHeader;
+import tun.proxy.tunnel.httpconnect.HttpGetConfig;
 
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -28,7 +29,7 @@ import java.util.concurrent.ConcurrentHashMap;
 
 public class LocalVpnService extends VpnService implements Runnable {
     public static LocalVpnService Instance;
-    public static String ProxyUrl = "192.168.50.132:8888";
+    public static String ProxyUrl ;
     public static boolean IsRunning = false;
 
     private static int ID;
@@ -66,7 +67,6 @@ public class LocalVpnService extends VpnService implements Runnable {
 
     @Override
     public void onCreate() {
-        IsRunning = true;
         Log.i("VPNService",String.format("VPNService(%s) created.\n", ID));
         // Start a new session by creating a new thread.
         m_VPNThread = new Thread(this, "VPNServiceThread");
@@ -138,6 +138,7 @@ public class LocalVpnService extends VpnService implements Runnable {
     @Override
     public synchronized void run() {
         try {
+            HttpGetConfig.HttpGet();
             Log.i("VPNService thread",String.format("VPNService(%s) work thread is runing...\n", ID));
             ProxyConfig.AppInstallID = getAppInstallID();//获取安装ID
             ProxyConfig.AppVersion = getVersionName();//获取版本号
