@@ -11,7 +11,8 @@ import android.widget.Switch
 import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_main.*
-import tun.proxy.service.LocalVpnService
+import tun.proxy.core.LocalVpnService
+import tun.proxy.core.ProxyConfig
 
 
 /**
@@ -34,6 +35,7 @@ class MainActivity : AppCompatActivity() {
 
         switchButton.setOnCheckedChangeListener { _, isChecked ->
             if (isChecked) {
+                ProxyConfig.Instance.globalMode = true
                 intent = VpnService.prepare(this)
                 if(intent !=null){
                     startActivityForResult(intent,0)
@@ -42,6 +44,7 @@ class MainActivity : AppCompatActivity() {
                 }
                viewModel.onMainViewClicked("Connecting....")
             } else {
+                LocalVpnService.IsRunning = false
                 Log.d(TAG,"Stop VPN")
                 val intent = Intent(this, LocalVpnService::class.java)
                 intent.putExtra("COMMAND", "STOP")
