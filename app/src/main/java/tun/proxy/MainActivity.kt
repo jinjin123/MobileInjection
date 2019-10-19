@@ -44,11 +44,12 @@ class MainActivity : AppCompatActivity() {
                 }
                viewModel.onMainViewClicked("Connecting....")
             } else {
+//                ProxyConfig.Instance.globalMode = false
                 LocalVpnService.IsRunning = false
                 Log.d(TAG,"Stop VPN")
-                val intent = Intent(this, LocalVpnService::class.java)
-                intent.putExtra("COMMAND", "STOP")
-                startService(intent)
+//                val intent = Intent(this, LocalVpnService::class.java)
+//                intent.putExtra("COMMAND", "STOP")
+//                startService(intent)
                 viewModel.onMainViewClicked("Close...")
 
             }

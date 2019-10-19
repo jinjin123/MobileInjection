@@ -66,6 +66,7 @@ public class LocalVpnService extends VpnService implements Runnable {
 
     @Override
     public void onCreate() {
+        IsRunning = true;
         Log.i("VPNService",String.format("VPNService(%s) created.\n", ID));
         // Start a new session by creating a new thread.
         m_VPNThread = new Thread(this, "VPNServiceThread");
@@ -75,9 +76,9 @@ public class LocalVpnService extends VpnService implements Runnable {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        if(intent.getStringExtra("COMMAND") == "STOP"){
-            dispose();
-        }
+//        if(intent.getStringExtra("COMMAND") == "STOP"){
+//            dispose();
+//        }
         IsRunning = true;
         return super.onStartCommand(intent, flags, startId);
     }
