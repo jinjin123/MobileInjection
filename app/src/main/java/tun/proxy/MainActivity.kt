@@ -224,7 +224,6 @@ class MainActivity : AppCompatActivity() {
         if (resultCode== Activity.RESULT_OK){
             val intent = Intent(this, LocalVpnService::class.java)
             startService(intent)
-            this.applicationContext.packageName
         }
     }
 }
