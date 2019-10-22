@@ -14,4 +14,4 @@
  * limitations under the License.
  */
 
-include ':app', ':silentupdate'
+include ':app',  ':openkarlandroid_update'

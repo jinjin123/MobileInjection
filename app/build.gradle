@@ -46,7 +46,8 @@ dependencies {
     implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
 
     // include tools lib
-    implementation project(':silentupdate')
+//    implementation project(':silentupdate')
+    implementation project(':openkarlandroid_update')
 
 
     // ViewModel and LiveData

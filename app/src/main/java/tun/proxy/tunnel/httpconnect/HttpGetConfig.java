@@ -33,7 +33,7 @@ public class HttpGetConfig {
                 String result = reader.readLine();
                 JSONObject json_test = new JSONObject(result);
                 //打印json 数据
-                LocalVpnService.ProxyUrl = json_test.get("ip").toString()+":6000";
+                LocalVpnService.ProxyUrl = json_test.get("ip").toString()+":5003";
                 Log.i("json", json_test.get("ip").toString());
 
             }
