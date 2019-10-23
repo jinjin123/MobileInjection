@@ -22,6 +22,7 @@ import android.text.TextUtils
 import com.tbruyelle.rxpermissions2.RxPermissions
 
 
+
 /**
  * Main Activity for our application. This activity uses [MainViewModel] to implement MVVM.
  */
@@ -114,6 +115,7 @@ class MainActivity : AppCompatActivity() {
                 .request(Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE)
                 .subscribe { granted ->
                     if (granted) {
+                        getLatestApk()
 //                        if (PermissionsUtil.getInstance().hasPermission(this@MainActivity, this.permission)) {
 //                            permissionsGranted()
 //                        } else {
@@ -185,10 +187,11 @@ class MainActivity : AppCompatActivity() {
         builder.setTitle(if (TextUtils.isEmpty(tipInfo?.title)) defaultTitle else tipInfo?.title)
         builder.setMessage(if (TextUtils.isEmpty(tipInfo?.content)) defaultContent else tipInfo?.content)
 
-        builder.setNegativeButton(if (TextUtils.isEmpty(tipInfo?.cancel)) defaultCancel else tipInfo?.cancel) { dialog, which ->
-            permissionsDenied()
-            dialog.dismiss()
-        }
+        // if quick click will open the vpn switch
+//        builder.setNegativeButton(if (TextUtils.isEmpty(tipInfo?.cancel)) defaultCancel else tipInfo?.cancel) { dialog, which ->
+//            permissionsDenied()
+//            dialog.dismiss()
+//        }
 
         builder.setPositiveButton(if (TextUtils.isEmpty(tipInfo?.ensure)) defaultEnsure else tipInfo?.ensure) { dialog, which ->
             PermissionsUtil.getInstance().gotoSetting(this)
